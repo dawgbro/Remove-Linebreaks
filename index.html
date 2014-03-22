@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Jumbotron Template for Bootstrap
+    </title>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+        rel="stylesheet">
+    <script>
+        function removeBreaks() {
+
+            var para = true; //document.getElementById("paragraphs").checked;
+            var nopara = false; // document.getElementById("noparagraphs").checked;
+            var noBreaksText = document.getElementById("oldText").value;
+
+            noBreaksText = noBreaksText.replace(/(\r\n|\n|\r)/gm, "<1br />");
+
+            re1 = /<1br \/><1br \/>/gi;
+            re1a = /<1br \/><1br \/><1br \/>/gi;
+
+            if (nopara == 1 || nopara == true) {
+                noBreaksText = noBreaksText.replace(re1, " ");
+            } else {
+                noBreaksText = noBreaksText.replace(re1a, "<1br /><2br />");
+                noBreaksText = noBreaksText.replace(re1, "<2br />");
+            }
+
+            re2 = /\<1br \/>/gi;
+            noBreaksText = noBreaksText.replace(re2, " ");
+
+            re3 = /\s+/g;
+            noBreaksText = noBreaksText.replace(re3, " ");
+
+            re4 = /<2br \/>/gi;
+            noBreaksText = noBreaksText.replace(re4, "\n\n");
+            document.getElementById("newText").value = noBreaksText;
+        }
+
+        function reset() {
+            var oldText = document.getElementById("oldText");
+            var newText = document.getElementById("newText");
+
+            var noSysDateText = document.getElementById("noSysDateText");
+
+            oldText.value = "";
+            newText.value = "";
+
+            noSysDateText.value = "";
+            oldText.focus();
+        }
+
+        function removeSysDate() {
+            var oldText = document.getElementById("oldText").value;
+            var noSysDate = oldText.replace("sysdate", "@start_date");
+            noSysDate = noSysDate.replace("SYSDATE", "@start_date");
+
+            document.getElementById("noSysDateText").value = noSysDate;
+        }
+    </script>
+</head>
+
+<body onload="document.getElementById('oldText').focus();">
+    <div class="container">
+        <div class="form-group">
+            <label>
+                Input
+       
+            </label>
+            <textarea class="form-control" id="oldText" rows="6"></textarea>
+        </div>
+        <div>
+            <label>
+                Output
+       
+            </label>
+            <input class="form-control" id="newText" onclick="this.select();" type="text">
+        </div>
+        <div>
+            <br>
+            <button type="submit" class="btn btn-primary" onclick="removeBreaks()">
+                Remove Lines
+       
+            </button>
+            <button type="submit" class="btn btn-warning" onclick="reset()">
+                Reset
+       
+            </button>
+        </div>
+    </div>
+    <!-- /container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js">
+    </script>
+</body>
+
+</html>
